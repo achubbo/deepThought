@@ -1,6 +1,6 @@
 #!/bin/bash
 DATE=""
-DIRNAME="MC"
+DIRNAME="MC/world"
 SCREENID=""
 ARCHFILE=""
 SCREENID=$(screen -ls|grep pts|awk -F " " '{print $1}')
