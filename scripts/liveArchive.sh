@@ -9,5 +9,10 @@ function createVars {
 function archive {
   tar -cvf /app/archive/${DIRNAME}_${DATE}.tar.gz /app/$DIRNAME
 }
+
+function archiveMessage {
+  screen -S 2140.pts-0.deepThought -X stuff 'say archiving server'`echo -ne '\015'`
+}
 createVars
 archive
+archiveMessage
