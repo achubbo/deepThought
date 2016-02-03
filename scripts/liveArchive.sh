@@ -1,18 +1,23 @@
 #!/bin/bash
 DATE=""
 DIRNAME="MC"
+SCREENID=""
+ARCHFILE=""
+SCREENID=$(screen -ls|grep pts|awk -F " " '{print $1}')
+
 function createVars { 
-  DATE=$(date|awk -F " " '{print $4}'|sed 's/\:/\-/g')
-  
+  DATE=$(date +"%m-%d-%y") 
 }
 
 function archive {
-  tar -cvf /app/archive/${DIRNAME}_${DATE}.tar.gz /app/$DIRNAME
+  ARCHFILE=${DIRNAME}_${DATE}
+  tar -cvf /app/archive/${ARCHFILE}.tar.gz /app/$DIRNAME
 }
 
 function archiveMessage {
-  screen -S 2140.pts-0.deepThought -X stuff 'say archiving server'`echo -ne '\015'`
+  screen -S ${SCREENID} -X stuff 'say archiving server as '$ARCHFILE`echo -ne '\015'`
 }
+
 createVars
 archive
 archiveMessage
